@@ -1,0 +1,20 @@
+Required Changes
+
+#  Bootstrap
+
+## Verions IDs
+HVM Versions
+Tails Supported Version
+
+## Repositories
+Debian Snapshots
+Debian Version
+Virtualbox Version
+
+## Zenity
+Remove --class="" fields
+
+#  AppImage
+
+# Tooling
+Update gnome-termnal-server items
