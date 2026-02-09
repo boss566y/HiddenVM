@@ -2,6 +2,6 @@
 # See /etc/apt/sources.list.d/ for examples.
 
 # non-free sources
-#deb tor+https://deb.debian.org/debian bullseye non-free
-#deb tor+https://deb.debian.org/debian bullseye-backports non-free
-#deb tor+https://deb.debian.org/debian-security/ bullseye-security non-free
+#deb tor+https://deb.debian.org/debian trixie non-free
+#deb tor+https://deb.debian.org/debian trixie-backports non-free
+#deb tor+https://deb.debian.org/debian-security/ trixie-security non-free
