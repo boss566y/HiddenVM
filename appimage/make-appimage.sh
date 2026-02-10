@@ -31,6 +31,7 @@ cp -r \
     ../AppRun \
     ../launch-log-progress.sh \
     ../bootstrap.sh \
+    ../toggle_kvm.sh \
     ../lib \
     ../extras \
     ../HVM_VERSION \

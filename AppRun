@@ -70,33 +70,9 @@ else
     log "Did not find local env file in ${LAUNCH_DIR}/HiddenVM/"
 fi
 
-# gnome-terminal uses a client-server architecture, so a server is reused and
-# new windows are created, rather than separate processes. This doesn't work
-# for us, because we need to make sure AppRun waits for launch-log-progress.sh
-# to complete before terminating. Otherwise the AppImage will be unmounted
-# before launch-log-progress.sh finishes. So the solution is to start a custom
-# terminal server and open a client terminal on it.
+kgx --working-directory "${HERE}" -- \
+    bash -c "./launch-log-progress.sh \"${ENV_FILE_ARG}\" \"${LOG_FILE}\"" 2>&1
 
-SERVER_APP_ID="hidden.vm.id"
-/usr/libexec/gnome-terminal-server --app-id "${SERVER_APP_ID}" &
-
-# Try to launch a terminal on the server. We have 10s before the server goes
-# away! The server may take some time to come up, so we have to retry on error.
-# gnome-terminal always returns 0, so we need to check the output for Error.
-while
-    gnome-terminal --app-id "${SERVER_APP_ID}" --working-directory "${HERE}" -- \
-        bash -c "./launch-log-progress.sh \"${ENV_FILE_ARG}\" \"${LOG_FILE}\"" 2>&1 | \
-        grep "Error creating terminal"
-do
-    error "gnome-terminal-server '${SERVER_APP_ID}' is not ready, trying again..."
-    sleep 1
-done
-
-# Re-attach to the gnome-terminal server. The server
-# will terminate when the terminal is closed)
-fg
-
-log "gnome-terminal was closed"
 
 # If launch-log-progress.sh successfully installed the env file in
 # CLEARNET_VBOX_LIB_HOME, source it to get the HVM_HOME
@@ -131,3 +107,6 @@ if [ -f "${CLEARNET_VBOX_ENV_FILE}" ]; then
         cp "${LOG_FILE}" "${LOG_DIR}"
     fi
 fi
+
+kgx --working-directory "${HERE}" -- \
+    bash -c "./toggle_kvm.sh"
