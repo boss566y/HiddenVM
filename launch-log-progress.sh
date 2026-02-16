@@ -79,15 +79,3 @@ else
         --text "The installation did not complete! Check the log file for details." \
         >/dev/null 2>&1
 fi
-
-# Run toggle_kvm.sh
-if ./toggle_kvm.sh "${ENV_FILE}"; then
-    reset_sudo_timeout_policy
-    exit 0
-else
-    reset_sudo_timeout_policy
-    # Let zenity take over this process
-    exec zenity --window-icon=${HVM_ICON_COLOR} --width 400 --error --title "HiddenVM" \
-        --text "KVM module not toggled! Check the log file for details." \
-        >/dev/null 2>&1
-fi
