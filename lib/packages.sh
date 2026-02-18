@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+. VERSION_CONTROLS
 
 enforce_amnesia
 
@@ -27,8 +28,8 @@ LAST_PKG_CACHE_PRUNE_DATE_FILE="${CACHE_DIR}/last-pkg-cache-prune"
 PKG_CACHE_PRUNE_FREQ_DAYS=7
 LAST_TAILS_VERSION_FILE="${CACHE_DIR}/last-tails-version"
 LINUX_HEADERS_PKG="linux-headers-$(uname -r)"
-LINUX_HEADERS_RELEASE="bookworm" # In the past it has been "bookworm", "sid", "bullseye", "buster-backports", etc.
-VBOX_PACKAGE_NAME="virtualbox-7.0"
+LINUX_HEADERS_RELEASE="${DEBIAN_VERSION}"
+VBOX_PACKAGE_NAME="${VIRTUALBOX_VERSION}"
 
 # SourceList is to replace /etc/apt/sources.list
 # SourceParts=- is to disable /etc/apt/sources.list.d

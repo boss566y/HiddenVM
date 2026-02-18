@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# Source some common variables we need
+. "lib/VERSION_CONTROLS"
 
 set -e
 set -u
@@ -33,8 +35,6 @@ cp -r \
     ../bootstrap.sh \
     ../lib \
     ../extras \
-    ../HVM_VERSION \
-    ../SUPPORTED_TAILS_VERSIONS \
     ../LICENSE \
     hiddenvm.desktop \
         "${ROOT_DIR}/"
@@ -53,7 +53,7 @@ if [ ! -f "${APPIMGTOOL}" ]; then
     chmod +x "${APPIMGTOOL}"
 fi
 
-APPIMG_NAME="HiddenVM-$(cat ../HVM_VERSION)-x86_64"
+APPIMG_NAME="HiddenVM-${HVM_VERSION}-x86_64"
 APPIMG_FILE="${APPIMG_NAME}.AppImage"
 
 # Generate the AppImage and copy the LICENSE file to the target directory

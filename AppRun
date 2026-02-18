@@ -23,10 +23,14 @@ LAUNCH_DIR=$(pwd)
 # This is where we are within the AppImage mount
 HERE="$(dirname "$(readlink -f "${0}")")"
 
+# We need common functions and CLEARNET_VBOX_ENV_FILE
+. "${HERE}/lib/common.sh"
+. "${HERE}/lib/VERSION_CONTROLS"
+
 while [ -n "${1}" ]; do
     case "${1}" in
         -version)
-            cat "${HERE}/HVM_VERSION"
+            "${HVM_VERSION}"
             exit
             ;;
 
@@ -41,9 +45,6 @@ while [ -n "${1}" ]; do
 done
 
 LOG_FILE="${LAUNCH_DIR}/HiddenVM.log"
-
-# We need common functions and CLEARNET_VBOX_ENV_FILE
-. "${HERE}/lib/common.sh"
 
 enforce_amnesia
 

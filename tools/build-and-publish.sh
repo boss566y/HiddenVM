@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+# Source some common variables
+. "lib/VERSION_CONTROLS"
 
 set -e
 set -u
@@ -55,7 +57,7 @@ echo "Publishing release v${HVM_VERSION} to github"
 # Run ghr from repo root. Note that you must have an API token configured.
 pushd ../
 
-RELEASE_BODY="Supported Tails versions: $(cut -d " " -f 1 < ./SUPPORTED_TAILS_VERSIONS | paste -s -d "," | sed "s/,/, /g")"
+RELEASE_BODY="Supported Tails versions: $(cut -d " " -f 1 < ${SUPPORTED_TAILS_VERSIONS} | paste -s -d "," | sed "s/,/, /g")"
 $(go env GOPATH)/bin/ghr ${GHR_OPT} -n v${HVM_VERSION} -b "${RELEASE_BODY}" v${HVM_VERSION} appimage/target/release
 
 popd
